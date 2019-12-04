@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayOne", "DayOne\DayOne.csproj", "{CE34E388-C0A6-4CF0-9EBF-113331438AF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayOne", "DayOne\DayOne.csproj", "{CE34E388-C0A6-4CF0-9EBF-113331438AF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCodeTests", "AdventOfCodeTests\AdventOfCodeTests.csproj", "{FDCB0517-4FA5-47B6-9288-ED5F85F20219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCodeTests", "AdventOfCodeTests\AdventOfCodeTests.csproj", "{FDCB0517-4FA5-47B6-9288-ED5F85F20219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnswerApp", "AnswerApp\AnswerApp.csproj", "{5C53F0B9-2D49-46F8-A409-C23A98B7281F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnswerApp", "AnswerApp\AnswerApp.csproj", "{5C53F0B9-2D49-46F8-A409-C23A98B7281F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayTwo", "DayTwo\DayTwo.csproj", "{0BC02D91-FD15-45C7-8A38-1D988384C7FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{5C53F0B9-2D49-46F8-A409-C23A98B7281F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C53F0B9-2D49-46F8-A409-C23A98B7281F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C53F0B9-2D49-46F8-A409-C23A98B7281F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
