@@ -4,22 +4,22 @@ namespace DayTwo
 {
     public class IntcodeProgram
     {
-        private List<int> _program;
-        private int _nextPosition;
+        private List<int> _memory;
+        private int _instructionPointer;
         private int _lengthProgram;
         private OpCode? _opCode;
 
-        public IntcodeProgram(List<int> program)
+        public IntcodeProgram(List<int> memory)
         {
-            _program = program;
-            _lengthProgram = program.Count;
-            _nextPosition = 0;
+            _memory = memory;
+            _lengthProgram = memory.Count;
+            _instructionPointer = 0;
             _opCode = ReadOpCode();
         }
 
         public List<int> Process()
         {
-            while(_opCode != OpCode.Stop && _nextPosition < _lengthProgram)
+            while(_opCode != OpCode.Stop && _instructionPointer < _lengthProgram)
             {
                 if(_opCode == null)
                     throw new System.Exception("Unrecognized OpCode");
@@ -36,39 +36,35 @@ namespace DayTwo
                 Update();
             }
 
-            return _program;
+            return _memory;
         }
 
         private OpCode ReadOpCode()
         {
-            return (OpCode)_program[_nextPosition];
+            return (OpCode)_memory[_instructionPointer];
         }
 
         private void Add()
         {
-            var leftPosition = _program[_nextPosition + 1];
-            var leftValue = _program[leftPosition];
-            var rightPosition = _program[_nextPosition + 2];
-            var rightValue = _program[rightPosition];
-            var updatePosition = _program[_nextPosition + 3];
-
-            _program[updatePosition] = leftValue + rightValue;
+            var updatePosition = _memory[_instructionPointer + 3];
+            _memory[updatePosition] = GetValueForParameter(1) + GetValueForParameter(2);
         }
 
         private void Multiply()
         {
-            var leftPosition = _program[_nextPosition + 1];
-            var leftValue = _program[leftPosition];
-            var rightPosition = _program[_nextPosition + 2];
-            var rightValue = _program[rightPosition];
-            var updatePosition = _program[_nextPosition + 3];
+            var updatePosition = _memory[_instructionPointer + 3];
+            _memory[updatePosition] = GetValueForParameter(1) * GetValueForParameter(2);
+        }
 
-            _program[updatePosition] = leftValue * rightValue;
+        private int GetValueForParameter(int parameter)
+        {
+            var position = _memory[_instructionPointer + parameter];
+            return _memory[position];
         }
 
         private void Update()
         {
-            _nextPosition += 4;
+            _instructionPointer += 4;
             _opCode = ReadOpCode();
         }
     }
