@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCodeTests", "Advent
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnswerApp", "AnswerApp\AnswerApp.csproj", "{5C53F0B9-2D49-46F8-A409-C23A98B7281F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayTwo", "DayTwo\DayTwo.csproj", "{0BC02D91-FD15-45C7-8A38-1D988384C7FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DayTwo", "DayTwo\DayTwo.csproj", "{0BC02D91-FD15-45C7-8A38-1D988384C7FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayThree", "DayThree\DayThree.csproj", "{72616F53-22F0-4A66-9767-675658C66AEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC02D91-FD15-45C7-8A38-1D988384C7FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72616F53-22F0-4A66-9767-675658C66AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72616F53-22F0-4A66-9767-675658C66AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72616F53-22F0-4A66-9767-675658C66AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72616F53-22F0-4A66-9767-675658C66AEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

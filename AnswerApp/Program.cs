@@ -1,5 +1,6 @@
 ﻿using DayOne;
 using DayTwo;
+using DayThree;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,10 +12,17 @@ namespace AnswerApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Answer Day Two Answer Two: {GetDayTwoAnswerTwo()}");
+            Console.WriteLine($"Answer Day Two Answer Two: {GetDayThreeAnswerOne()}");
+            // Console.WriteLine($"Answer Day Two Answer Two: {GetDayTwoAnswerTwo()}");
             // Console.WriteLine($"Answer Day Two Answer One: {GetDayTwoAnswerOne()}");
             // Console.WriteLine($"Answer Day One Answer Two: {GetDayOneAnswerTwo()}");
             // Console.WriteLine($"Answer Day One Answer One: {GetDayOneAnswerOne()}");
+        }
+
+        private static object GetDayThreeAnswerOne()
+        {
+            var crossedWires = new CrossedWires();
+            return crossedWires.GetClosestToCentralPort();
         }
 
         private static int GetDayTwoAnswerTwo()
