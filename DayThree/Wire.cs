@@ -17,6 +17,42 @@ namespace DayThree
         private Point _centralPort;
         private Point _last;
 
+        public int GetNumberOfStepsToIntersection(Point intersection)
+        {
+            var lastPoint = new Point(0, 0);
+            var steps = 0;
+            bool done = false;
+
+            foreach (var command in Commands)
+            {
+                var direction = GetDirection(command[0]);
+                var numberOfSteps = GetNumberOfSteps(command);
+
+                for (int i = 0; i < numberOfSteps; i++)
+                {
+                    steps++;
+                    var next = GetNextPoint(direction, lastPoint);
+                    if (!next.Equals(intersection))
+                    {
+                        lastPoint = next;
+                    }
+                    else
+                    {
+                        done = true;
+                        break;
+                    }
+                }
+
+                if (done)
+                    break;
+            }
+
+            if (!done)
+                throw new Exception($"Intersection ({intersection.X},{intersection.Y}) not on wire");
+
+            return steps;
+        }
+
         protected void DrawLine()
         {
             _last = CentralPort;
@@ -31,33 +67,31 @@ namespace DayThree
         {
             var line = new List<Point>();
             var direction = GetDirection(command[0]);
-            var distance = command.Substring(1);
+            var numberOfSteps = GetNumberOfSteps(command);
 
-            if (Int32.TryParse(distance, out int numberOfMoves))
+            for (int i = 0; i < numberOfSteps; i++)
             {
-                for (int i = 0; i < numberOfMoves; i++)
-                {
-                    var next = GetNextPoint(direction);
-                    line.Add(next);
-                    _last = next;
-                }
+                var next = GetNextPoint(direction, _last);
+                line.Add(next);
+                _last = next;
             }
+
 
             return line;
         }
 
-        private Point GetNextPoint(Direction direction)
+        private Point GetNextPoint(Direction direction, Point lastPoint)
         {
             switch (direction)
             {
                 case Direction.Up:
-                    return new Point(_last.X, _last.Y + 1);
+                    return new Point(lastPoint.X, lastPoint.Y + 1);
                 case Direction.Down:
-                    return new Point(_last.X, _last.Y - 1);
+                    return new Point(lastPoint.X, lastPoint.Y - 1);
                 case Direction.Left:
-                    return new Point(_last.X - 1, _last.Y);
+                    return new Point(lastPoint.X - 1, lastPoint.Y);
                 case Direction.Right:
-                    return new Point(_last.X + 1, _last.Y);
+                    return new Point(lastPoint.X + 1, lastPoint.Y);
                 default:
                     throw new Exception("Unknown direction");
             }
@@ -79,6 +113,14 @@ namespace DayThree
                 default:
                     throw new Exception($"Unknown direction: {direction}");
             }
+        }
+
+        private int GetNumberOfSteps(string command)
+        {
+            if (Int32.TryParse(command.Substring(1), out int numberOfSteps))
+                return numberOfSteps;
+
+            return 0;
         }
     }
 }

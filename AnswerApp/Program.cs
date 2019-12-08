@@ -13,11 +13,21 @@ namespace AnswerApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Answer Day Two Answer Two: {GetDayThreeAnswerOne()}");
-            // Console.WriteLine($"Answer Day Two Answer Two: {GetDayTwoAnswerTwo()}");
-            // Console.WriteLine($"Answer Day Two Answer One: {GetDayTwoAnswerOne()}");
-            // Console.WriteLine($"Answer Day One Answer Two: {GetDayOneAnswerTwo()}");
-            // Console.WriteLine($"Answer Day One Answer One: {GetDayOneAnswerOne()}");
+            Console.WriteLine($"Answer Day Three Answer Two: {GetDayThreeAnswerTwo()}");
+            //Console.WriteLine($"Answer Day Three Answer One: {GetDayThreeAnswerOne()}");
+            //Console.WriteLine($"Answer Day Two Answer Two: {GetDayTwoAnswerTwo()}");
+            //Console.WriteLine($"Answer Day Two Answer One: {GetDayTwoAnswerOne()}");
+            //Console.WriteLine($"Answer Day One Answer Two: {GetDayOneAnswerTwo()}");
+            //Console.WriteLine($"Answer Day One Answer One: {GetDayOneAnswerOne()}");
+        }
+
+        private static int GetDayThreeAnswerTwo()
+        {
+            var wireOne = new WireOne();
+            var wireTwo = new WireTwo();
+            var centralPort = new Point(0, 0);
+            var crossedWires = new CrossedWires(wireOne, wireTwo, centralPort);
+            return crossedWires.GetClosestDistanceToCentralPortBySteps();
         }
 
         private static int GetDayThreeAnswerOne()
@@ -26,7 +36,7 @@ namespace AnswerApp
             var wireTwo = new WireTwo();
             var centralPort = new Point(0, 0);
             var crossedWires = new CrossedWires(wireOne, wireTwo, centralPort);
-            return crossedWires.GetClosestDistanceToCentralPort();
+            return crossedWires.GetClosestDistanceToCentralPortByManhattan();
         }
 
         private static int GetDayTwoAnswerTwo()
