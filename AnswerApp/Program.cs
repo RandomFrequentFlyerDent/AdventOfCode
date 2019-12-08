@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Drawing;
 
 namespace AnswerApp
 {
@@ -19,10 +20,13 @@ namespace AnswerApp
             // Console.WriteLine($"Answer Day One Answer One: {GetDayOneAnswerOne()}");
         }
 
-        private static object GetDayThreeAnswerOne()
+        private static int GetDayThreeAnswerOne()
         {
-            var crossedWires = new CrossedWires();
-            return crossedWires.GetClosestToCentralPort();
+            var wireOne = new WireOne();
+            var wireTwo = new WireTwo();
+            var centralPort = new Point(0, 0);
+            var crossedWires = new CrossedWires(wireOne, wireTwo, centralPort);
+            return crossedWires.GetClosestDistanceToCentralPort();
         }
 
         private static int GetDayTwoAnswerTwo()
