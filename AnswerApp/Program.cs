@@ -16,16 +16,17 @@ namespace AnswerApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Answer Day Four Answer One: {GetDayFourAnswerOne().Result}");
+            Console.WriteLine($"Answer Day Four Answer Two: {GetDayFourAnswer(true).Result}");
+            // Console.WriteLine($"Answer Day Four Answer One: {GetDayFourAnswer(false).Result}");
             // Console.WriteLine($"Answer Day Three Answer Two: {GetDayThreeAnswerTwo()}");
-            //Console.WriteLine($"Answer Day Three Answer One: {GetDayThreeAnswerOne()}");
-            //Console.WriteLine($"Answer Day Two Answer Two: {GetDayTwoAnswerTwo()}");
-            //Console.WriteLine($"Answer Day Two Answer One: {GetDayTwoAnswerOne()}");
-            //Console.WriteLine($"Answer Day One Answer Two: {GetDayOneAnswerTwo()}");
-            //Console.WriteLine($"Answer Day One Answer One: {GetDayOneAnswerOne()}");
+            // Console.WriteLine($"Answer Day Three Answer One: {GetDayThreeAnswerOne()}");
+            // Console.WriteLine($"Answer Day Two Answer Two: {GetDayTwoAnswerTwo()}");
+            // Console.WriteLine($"Answer Day Two Answer One: {GetDayTwoAnswerOne()}");
+            // Console.WriteLine($"Answer Day One Answer Two: {GetDayOneAnswerTwo()}");
+            // Console.WriteLine($"Answer Day One Answer One: {GetDayOneAnswerOne()}");
         }
 
-        private static async Task<int> GetDayFourAnswerOne()
+        private static async Task<int> GetDayFourAnswer(bool isQuestionTwo)
         {
             var possiblePasswords = 0;
             var range = Enumerable.Range(372037, 905158 - 372037);
@@ -33,7 +34,7 @@ namespace AnswerApp
 
             foreach (var number in range)
             {
-                tasks.Add(PasswordChecker.IsValid(number, 372037, 905157));
+                tasks.Add(PasswordChecker.IsValid(number, 372037, 905157, isQuestionTwo));
             }
 
             foreach (var task in await Task.WhenAll(tasks))

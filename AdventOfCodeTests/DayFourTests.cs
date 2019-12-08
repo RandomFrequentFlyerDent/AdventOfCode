@@ -19,14 +19,14 @@ namespace AdventOfCodeTests
         [TestCase(111111, 0, 11000000)]
         public void PasswordIsSixDigits(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
         }
 
         [TestCase(11111, 0, 11000000)]
         [TestCase(1111111, 0, 11000000)]
         public void PasswordIsNotSixDigits(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
         }
 
         [TestCase(111111, 111110, 111112)]
@@ -34,14 +34,14 @@ namespace AdventOfCodeTests
         [TestCase(111111, 111111, 111112)]
         public void PasswordIsWithinRange(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
         }
 
         [TestCase(111111, 111112, 111113)]
         [TestCase(111111, 111109, 111110)]
         public void PasswordIsNotWithinRange(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
         }
 
         [TestCase(112345, 0, 11000000)]
@@ -51,19 +51,32 @@ namespace AdventOfCodeTests
         [TestCase(123455, 0, 11000000)]
         public void PasswordHasTwoEqualAdjacentDigits(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
         }
 
         [TestCase(123789, 0, 11000000)]
         public void PasswordDoesNotHaveTwoEqualAdjacentDigits(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
         }
 
         [TestCase(223450, 0, 11000000)]
         public void PasswordDecreases(int password, int rangeStart, int rangeEnd)
         {
-            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd).Result);
+            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd, false).Result);
+        }
+
+        [TestCase(112233, 0, 11000000)]
+        [TestCase(111122, 0, 11000000)]
+        public void PasswordHasOnlyTwoAdjacentDigits(int password, int rangeStart, int rangeEnd)
+        {
+            Assert.IsTrue(PasswordChecker.IsValid(password, rangeStart, rangeEnd, true).Result);
+        }
+
+        [TestCase(123444, 0, 11000000)]
+        public void PasswordDoesNotHaveOnlyTwoAdjacentDigits(int password, int rangeStart, int rangeEnd)
+        {
+            Assert.IsFalse(PasswordChecker.IsValid(password, rangeStart, rangeEnd, true).Result);
         }
     }
 }

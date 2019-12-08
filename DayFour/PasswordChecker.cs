@@ -6,7 +6,7 @@ namespace DayFour
 {
     public class PasswordChecker
     {
-        public static async Task<bool> IsValid(int password, int rangeStart, int rangeEnd)
+        public static async Task<bool> IsValid(int password, int rangeStart, int rangeEnd, bool extraRequirement)
         {
             var valid = await Task.Run(() =>
             {
@@ -16,7 +16,7 @@ namespace DayFour
                 if (!IsWithinRange(password, rangeStart, rangeEnd))
                     return false;
 
-                if (!HasTwoAdjacentSameDigits(password))
+                if (!HasTwoAdjacentSameDigits(password, extraRequirement))
                     return false;
 
                 return DoesNotDecrease(password);
@@ -40,7 +40,7 @@ namespace DayFour
             return false;
         }
 
-        private static bool HasTwoAdjacentSameDigits(int password)
+        private static bool HasTwoAdjacentSameDigits(int password, bool extraRequirement)
         {
             var convertedPassword = password.ToString();
 
@@ -57,6 +57,10 @@ namespace DayFour
             foreach (var doubleDigit in multipleOccurences)
             {
                 var exists = convertedPassword.Contains(doubleDigit + doubleDigit);
+
+                if (extraRequirement)
+                    exists = exists && !convertedPassword.Contains(doubleDigit + doubleDigit + doubleDigit);
+
                 if (exists)
                     return true;
             }
