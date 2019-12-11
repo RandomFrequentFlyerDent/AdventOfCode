@@ -21,18 +21,20 @@ namespace AnswerApp
             _computer = new IntCodeComputer((int[])_originalMemory.Clone());
         }
 
+        /// <summary>
+        /// Day Two Answer One
+        /// </summary>
         public void Restore()
         {
             _computer.SetNoun(12);
             _computer.SetVerb(2);
-        }
-
-        public void ReadOut()
-        {
             _computer.Process();
             Console.WriteLine($"Value of memory at address 0 of the Gravity Assist is {_computer.RetrieveValueFromMemory(0)}");
         }
 
+        /// <summary>
+        /// Day Two Answer Two
+        /// </summary>
         public void Activate(int requiredOutput)
         {
             bool outputReached = false;

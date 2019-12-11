@@ -18,7 +18,6 @@ namespace AnswerApp
             var santaShip = new SantaShip();
 
             santaShip.GravityAssist.Restore();
-            santaShip.GravityAssist.ReadOut();
             santaShip.GravityAssist.Activate(19690720);
         }
 
