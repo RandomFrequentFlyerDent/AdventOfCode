@@ -1,15 +1,14 @@
-﻿using SantaShip;
-using System;
-
-namespace AnswerApp
+﻿namespace AnswerApp
 {
     public class SantaShip
     {
-        public GravityAssistProgram GravityAssist { get; private set; }
+        public GravityAssistProgram GravityAssist { get; }
+        public ModuleInformation ModuleInformation { get; }
 
         public SantaShip()
         {
             GravityAssist = new GravityAssistProgram();
+            ModuleInformation = new ModuleInformation();
         }
     }
 }

@@ -1,9 +1,9 @@
-using DayOne;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using SantaShip;
 
-namespace AdventOfCodeTests
+namespace AdventOfCodeTests.SantaShipTests
 {
-    public class DayOneTests
+    public class ShipModuleTests
     {
         // For a mass of 12, divide by 3 and round down to get 4, then subtract 2 to get 2.
         // For a mass of 14, dividing by 3 and rounding down still yields 4, so the fuel required is also 2.
@@ -18,7 +18,8 @@ namespace AdventOfCodeTests
         [TestCase(2, ExpectedResult = 0)]
         public long CalculateFuelRequirement(long mass)
         {
-            return FuelCalculator.CalculateFuelRequirement(mass);
+            var module = new ShipModule(mass);
+            return module.CalculateFuelRequirement();
         }
 
         // A module of mass 14 requires 2 fuel. This fuel requires no further fuel 
@@ -35,7 +36,8 @@ namespace AdventOfCodeTests
         [TestCase(100756, ExpectedResult = 50346)]
         public long CalculateAllTheFuelRequirements(long mass)
         {
-            return FuelCalculator.CalculateAllTheFuelRequirements(mass);
+            var module = new ShipModule(mass);
+            return module.CalculateTotalFuelRequirement();
         }
     }
 }
