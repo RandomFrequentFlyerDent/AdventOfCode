@@ -84,12 +84,18 @@ namespace AnswerApp
             _circuitBoard = new CircuitBoard(centralPort, new List<Wire> { wireOne, wireTwo });
         }
 
+        /// <summary>
+        /// Day Three Answer One
+        /// </summary>
         public void GetDistanceFromCentralPortToClosestIntersectionByManhattan()
         {
             var distance = _circuitBoard.GetDistanceToClosestIntersection(DistanceCaluclation.Manhattan);
             Console.WriteLine($"The closest intersection to the centralpoint by Manhattan calculation is at {distance}");
         }
 
+        /// <summary>
+        /// Day Three Answer Two
+        /// </summary>
         public void GetDistanceFromCentralPortToClosestIntersectionAlongTheWire()
         {
             var distance = _circuitBoard.GetDistanceToClosestIntersection(DistanceCaluclation.AlongTheWire);
