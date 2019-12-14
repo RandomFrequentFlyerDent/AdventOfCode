@@ -1,9 +1,4 @@
-﻿using DayFour;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AnswerApp
+﻿namespace AnswerApp
 {
     class Program
     {
@@ -11,27 +6,14 @@ namespace AnswerApp
         {
             var santaShip = new SantaShip();
 
-            santaShip.Circuitry.GetDistanceFromCentralPortToClosestIntersectionAlongTheWire();
-        }
-
-        private static async Task<int> GetDayFourAnswer(bool isQuestionTwo)
-        {
-            var possiblePasswords = 0;
-            var range = Enumerable.Range(372037, 905158 - 372037);
-            var tasks = new List<Task<bool>>();
-
-            foreach (var number in range)
-            {
-                tasks.Add(PasswordChecker.IsValid(number, 372037, 905157, isQuestionTwo));
-            }
-
-            foreach (var task in await Task.WhenAll(tasks))
-            {
-                if(task)
-                    possiblePasswords++;
-            }
-
-            return possiblePasswords;
+            santaShip.VenusFuelContainer.GetNumberOfValidPasswords(372037, 905157, maxTwoAdjacent: true);
+            //santaShip.VenusFuelContainer.GetNumberOfValidPasswords(372037, 905157, maxTwoAdjacent: false);
+            //santaShip.Circuitry.GetDistanceFromCentralPortToClosestIntersectionAlongTheWire();
+            //santaShip.Circuitry.GetDistanceFromCentralPortToClosestIntersectionByManhattan();
+            //santaShip.GravityAssist.Activate(19690720);
+            //santaShip.GravityAssist.Restore();
+            //santaShip.ModuleInformation.DetermineTotalFuelRequirement();
+            //santaShip.ModuleInformation.DetermineFuelRequirement();
         }
     }
 }
