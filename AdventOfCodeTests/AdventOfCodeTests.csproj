@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DayFour\DayFour.csproj" />
-    <ProjectReference Include="..\DayThree\DayThree.csproj" />
     <ProjectReference Include="..\SantaShip\SantaShip.csproj" />
   </ItemGroup>
 

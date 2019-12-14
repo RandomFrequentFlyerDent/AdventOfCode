@@ -1,5 +1,4 @@
 ﻿using DayFour;
-using DayThree;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace AnswerApp
         {
             var santaShip = new SantaShip();
 
-            santaShip.ModuleInformation.DetermineTotalFuelRequirement();
+            santaShip.Circuitry.GetDistanceFromCentralPortToClosestIntersectionAlongTheWire();
         }
 
         private static async Task<int> GetDayFourAnswer(bool isQuestionTwo)
@@ -34,24 +33,6 @@ namespace AnswerApp
             }
 
             return possiblePasswords;
-        }
-
-        private static int GetDayThreeAnswerTwo()
-        {
-            var wireOne = new WireOne();
-            var wireTwo = new WireTwo();
-            var centralPort = new Point(0, 0);
-            var crossedWires = new CrossedWires(wireOne, wireTwo, centralPort);
-            return crossedWires.GetClosestDistanceToCentralPortBySteps();
-        }
-
-        private static int GetDayThreeAnswerOne()
-        {
-            var wireOne = new WireOne();
-            var wireTwo = new WireTwo();
-            var centralPort = new Point(0, 0);
-            var crossedWires = new CrossedWires(wireOne, wireTwo, centralPort);
-            return crossedWires.GetClosestDistanceToCentralPortByManhattan();
         }
     }
 }
