@@ -48,5 +48,13 @@ namespace AnswerApp
         {
             _computer = new IntCodeComputer((int[])_originalMemory.Clone());
         }
+
+        public void Run(int input)
+        {
+            _computer.Input = input;
+            _computer.Process();
+            var output = _computer.Output;
+            Console.WriteLine($"Diagnostic code for input {input} is {output}");
+        }
     }
 }
