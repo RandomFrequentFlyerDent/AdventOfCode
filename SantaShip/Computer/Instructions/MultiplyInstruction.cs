@@ -4,26 +4,25 @@
      * and second parameter and places the result in the position given in the third parameter **/
     public class MultiplyInstruction : IInstruction
     {
-        private int _firstParameter;
-        private int _secondParameter;
-        private int _resultPosition;
+        private RetrieveParameter _first;
+        private RetrieveParameter _second;
+        private StoreParameter _third;
         public int NumberOfUsedMemorySlots { get { return 4; } }
 
-        public MultiplyInstruction(int instructionPointer)
+        public MultiplyInstruction(InstructionCode instructionCode, int instructionPointer)
         {
-            _firstParameter = instructionPointer + 1;
-            _secondParameter = instructionPointer + 2;
-            _resultPosition = instructionPointer + 3;
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2);
+            _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3);
         }
 
         public void Process(ref int[] memory)
         {
-            if (_resultPosition <= memory.Length)
+            if (_third.Position <= memory.Length)
             {
-                int leftValue = memory[memory[_firstParameter]];
-                int rightValue = memory[memory[_secondParameter]];
-
-                memory[memory[_resultPosition]] = leftValue * rightValue;
+                int firstValue = _first.GetValue(ref memory);
+                int secondValue = _second.GetValue(ref memory);
+                _third.StoreValue(ref memory, firstValue * secondValue);
             }
         }
     }

@@ -3,30 +3,22 @@
 {
     public class InstructionFactory
     {
-        public IInstruction CreateInstruction(int instructionCode, int instructionPointer, int? input = null)
+        public IInstruction CreateInstruction(int code, int instructionPointer, int? input = null)
         {
-            var opCode = (OpCode)instructionCode;
+            var instructionCode = new InstructionCode(code.ToString());
 
-            if (opCode == OpCode.Add)
-                return new AdditionInstruction(instructionPointer);
-            if (opCode == OpCode.Multiply)
-                return new MultiplyInstruction(instructionPointer);
-            if (opCode == OpCode.Input)
-                return new InputInstruction(instructionPointer, input);
-            if (opCode == OpCode.Output)
-                return new OutputInstruction(instructionPointer);
+            if (instructionCode.OpCode == OpCode.Add)
+                return new AdditionInstruction(instructionCode, instructionPointer);
+            if (instructionCode.OpCode == OpCode.Multiply)
+                return new MultiplyInstruction(instructionCode, instructionPointer);
+            if (instructionCode.OpCode == OpCode.Input)
+                return new InputInstruction(instructionCode, instructionPointer, input);
+            if (instructionCode.OpCode == OpCode.Output)
+                return new OutputInstruction(instructionCode, instructionPointer);
+            if (instructionCode.OpCode == OpCode.Stop)
+                return new StopInstruction();
 
             return null;
         }
-
-        private enum OpCode
-        {
-            Add = 1,
-            Multiply = 2,
-            Input = 3,
-            Output = 4,
-            Stop = 99
-        }
     }
-
 }

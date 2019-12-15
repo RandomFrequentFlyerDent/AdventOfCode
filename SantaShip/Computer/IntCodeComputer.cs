@@ -38,7 +38,11 @@ namespace SantaShip
                 IInstruction instruction = instructionFactory.CreateInstruction(opCode, instructionPointer, Input);
                 if (instruction != null)
                 {
-                    if (instruction is OutputInstruction)
+                    if (instruction is StopInstruction)
+                    {
+                        reading = false;
+                    }
+                     else if (instruction is OutputInstruction)
                     {
                         Output = ((OutputInstruction)instruction).GetOutput(ref _memory);
                     }

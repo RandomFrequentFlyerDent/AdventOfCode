@@ -2,19 +2,19 @@
 {
     public class OutputInstruction : IInstruction
     {
-        private int _firstParameter;
+        private RetrieveParameter _first;
         public int NumberOfUsedMemorySlots { get { return 2; } }
 
-        public OutputInstruction(int instructionPointer)
+        public OutputInstruction(InstructionCode instructionCode, int instructionPointer)
         {
-            _firstParameter = instructionPointer + 1;
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
         }
 
         public void Process(ref int[] memory) { }
 
         public int GetOutput(ref int[] memory)
         {
-            return memory[memory[_firstParameter]];
+            return _first.GetValue(ref memory);
         }
     }
 }
