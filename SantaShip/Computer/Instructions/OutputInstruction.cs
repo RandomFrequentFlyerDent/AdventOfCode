@@ -7,9 +7,9 @@ namespace SantaShip.Computer.Instructions
         private readonly RetrieveParameter _first;
         public int NumberOfUsedMemorySlots { get { return 2; } }
 
-        public OutputInstruction(InstructionCode instructionCode, int instructionPointer)
+        public OutputInstruction(InstructionCode instructionCode)
         {
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
         }
 
         public void Process(ref int[] memory) { }

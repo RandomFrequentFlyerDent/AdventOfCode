@@ -6,12 +6,14 @@ namespace SantaShip
     {
         public int[] Memory { get { return _memory; } }
         private int[] _memory;
+        public static int InstructionPointer { get; set; }
         public int Input { get; set; }
         public int Output { get; private set; }
 
         public IntCodeComputer(int[] memory)
         {
             _memory = memory;
+            InstructionPointer = 0;
         }
 
         public void SetNoun(int noun)
@@ -28,14 +30,13 @@ namespace SantaShip
         {
 
             var instructionFactory = new InstructionFactory();
-            var instructionPointer = 0;
             var lengthOfMemory = _memory.Length;
             var reading = true;
 
             do
             {
-                var opCode = _memory[instructionPointer];
-                IInstruction instruction = instructionFactory.CreateInstruction(opCode, instructionPointer, Input);
+                var opCode = _memory[InstructionPointer];
+                IInstruction instruction = instructionFactory.CreateInstruction(opCode, Input);
                 if (instruction != null)
                 {
                     if (instruction is StopInstruction)
@@ -50,14 +51,14 @@ namespace SantaShip
                     {
                         instruction.Process(ref _memory);
                     }
-                    instructionPointer += instruction.NumberOfUsedMemorySlots;
+                    InstructionPointer += instruction.NumberOfUsedMemorySlots;
                 }
                 else
                 {
                     reading = false;
                 }
 
-            } while (reading && instructionPointer < lengthOfMemory);
+            } while (reading && InstructionPointer < lengthOfMemory);
         }
 
         public int RetrieveValueFromMemory(int address)

@@ -11,11 +11,11 @@ namespace SantaShip.Computer.Instructions
         private readonly StoreParameter _third;
         public int NumberOfUsedMemorySlots { get { return 4; } }
 
-        public MultiplyInstruction(InstructionCode instructionCode, int instructionPointer)
+        public MultiplyInstruction(InstructionCode instructionCode)
         {
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
-            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2);
-            _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3);
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
+            _second = new RetrieveParameter(instructionCode.SecondParameterMode, IntCodeComputer.InstructionPointer + 2);
+            _third = new StoreParameter(instructionCode.ThirdParameterMode, IntCodeComputer.InstructionPointer + 3);
         }
 
         public void Process(ref int[] memory)

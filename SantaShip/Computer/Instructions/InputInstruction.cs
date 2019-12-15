@@ -8,10 +8,10 @@ namespace SantaShip.Computer.Instructions
         private readonly StoreParameter _first;
         public int NumberOfUsedMemorySlots { get { return 2; } }
 
-        public InputInstruction(InstructionCode instructionCode, int instructionPointer, int? input)
+        public InputInstruction(InstructionCode instructionCode, int? input)
         {
             _input = input;
-            _first = new StoreParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _first = new StoreParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
         }
 
         public void Process(ref int[] memory)
