@@ -1,4 +1,4 @@
-﻿namespace SantaShip.Computer.Instructions
+﻿namespace SantaShip.Computer.Instructions.Paramters
 {
     public class StoreParameter
     {

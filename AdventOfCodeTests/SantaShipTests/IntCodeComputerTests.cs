@@ -90,10 +90,10 @@ namespace AdventOfCodeTests.SantaShipTests
             var input = 50;
 
             var memory = new int[] { 3, 0, 4, 0, 99 };
-            var program = new IntCodeComputer(memory);
-
-
-            program.Input = input;
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
             program.Process();
 
             var output = program.Output;

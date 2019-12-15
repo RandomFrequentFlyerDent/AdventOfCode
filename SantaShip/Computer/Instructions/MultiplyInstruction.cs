@@ -1,12 +1,14 @@
-﻿namespace SantaShip.Computer.Instructions
+﻿using SantaShip.Computer.Instructions.Paramters;
+
+namespace SantaShip.Computer.Instructions
 {
     /** From  the instruction pointer multiplies the values on the position given by the first
      * and second parameter and places the result in the position given in the third parameter **/
     public class MultiplyInstruction : IInstruction
     {
-        private RetrieveParameter _first;
-        private RetrieveParameter _second;
-        private StoreParameter _third;
+        private readonly RetrieveParameter _first;
+        private readonly RetrieveParameter _second;
+        private readonly StoreParameter _third;
         public int NumberOfUsedMemorySlots { get { return 4; } }
 
         public MultiplyInstruction(InstructionCode instructionCode, int instructionPointer)

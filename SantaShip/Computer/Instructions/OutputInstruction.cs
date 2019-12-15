@@ -1,8 +1,10 @@
-﻿namespace SantaShip.Computer.Instructions
+﻿using SantaShip.Computer.Instructions.Paramters;
+
+namespace SantaShip.Computer.Instructions
 {
     public class OutputInstruction : IInstruction
     {
-        private RetrieveParameter _first;
+        private readonly RetrieveParameter _first;
         public int NumberOfUsedMemorySlots { get { return 2; } }
 
         public OutputInstruction(InstructionCode instructionCode, int instructionPointer)

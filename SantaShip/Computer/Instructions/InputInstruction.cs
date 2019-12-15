@@ -1,9 +1,11 @@
-﻿namespace SantaShip.Computer.Instructions
+﻿using SantaShip.Computer.Instructions.Paramters;
+
+namespace SantaShip.Computer.Instructions
 {
     public class InputInstruction : IInstruction
     {
-        private int? _input;
-        private StoreParameter _first;
+        private readonly int? _input;
+        private readonly StoreParameter _first;
         public int NumberOfUsedMemorySlots { get { return 2; } }
 
         public InputInstruction(InstructionCode instructionCode, int instructionPointer, int? input)
