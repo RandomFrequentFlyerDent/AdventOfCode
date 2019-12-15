@@ -6,7 +6,8 @@
         {
             var santaShip = new SantaShip();
 
-            santaShip.DiagnosticProgram.Run(1);
+            santaShip.DiagnosticProgram.Run(5);
+            //santaShip.DiagnosticProgram.Run(1);
             //santaShip.VenusFuelContainer.GetNumberOfValidPasswords(372037, 905157, maxTwoAdjacent: true);
             //santaShip.VenusFuelContainer.GetNumberOfValidPasswords(372037, 905157, maxTwoAdjacent: false);
             //santaShip.Circuitry.GetDistanceFromCentralPortToClosestIntersectionAlongTheWire();

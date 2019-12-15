@@ -100,5 +100,145 @@ namespace AdventOfCodeTests.SantaShipTests
 
             Assert.AreEqual(input, output);
         }
+
+        //3,9,8,9,10,9,4,9,99,-1,8 - Using position mode, consider whether the input is equal to 8; output 1 (if it is) or 0 (if it is not).
+        [Test]
+        public void OutputIsEqualToEightTrueProgramPositionMode()
+        {
+            var input = 8;
+
+            var memory = new int[] { 3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(1, output);
+        }
+
+        [TestCase(7)]
+        [TestCase(9)]
+        [TestCase(88)]
+        public void OutputIsEqualToEightFalseProgramPositionMode(int input)
+        {
+            var memory = new int[] { 3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(0, output);
+        }
+
+        //3,9,7,9,10,9,4,9,99,-1,8 - Using position mode, consider whether the input is less than 8; output 1 (if it is) or 0 (if it is not).
+        [TestCase(-2)]
+        [TestCase(0)]
+        [TestCase(7)]
+        public void OutputIsLessThanEightTrueProgramPositionMode(int input)
+        {
+            var memory = new int[] { 3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(1, output);
+        }
+
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(88)]
+        public void OutputIsLessThanEightFalseProgramPositionMode(int input)
+        {
+            var memory = new int[] { 3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(0, output);
+        }
+
+        //3,3,1108,-1,8,3,4,3,99 - Using immediate mode, consider whether the input is equal to 8; output 1 (if it is) or 0 (if it is not).
+        [Test]
+        public void OutputIsEqualToEightTrueProgramImmediateMode()
+        {
+            var input = 8;
+
+            var memory = new int[] { 3, 3, 1108, -1, 8, 3, 4, 3, 99 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(1, output);
+        }
+
+        [TestCase(7)]
+        [TestCase(9)]
+        [TestCase(88)]
+        public void OutputIsEqualToEightFalseProgramImmediateMode(int input)
+        {
+            var memory = new int[] { 3, 3, 1108, -1, 8, 3, 4, 3, 99 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(0, output);
+        }
+
+        //3,3,1107,-1,8,3,4,3,99 - Using immediate mode, consider whether the input is less than 8; output 1 (if it is) or 0 (if it is not).
+        [TestCase(-2)]
+        [TestCase(0)]
+        [TestCase(7)]
+        public void OutputIsLessThanEightTrueProgramImmediateMode(int input)
+        {
+            var memory = new int[] { 3, 3, 1107, -1, 8, 3, 4, 3, 99 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(1, output);
+        }
+
+        [TestCase(8)]
+        [TestCase(9)]
+        [TestCase(88)]
+        public void OutputIsLessThanEightFalseProgramImmediatenMode(int input)
+        {
+            var memory = new int[] { 3, 3, 1107, -1, 8, 3, 4, 3, 99 };
+            var program = new IntCodeComputer(memory)
+            {
+                Input = input
+            };
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(0, output);
+        }
     }
 }

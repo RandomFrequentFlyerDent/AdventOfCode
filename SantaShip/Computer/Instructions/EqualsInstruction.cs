@@ -2,15 +2,13 @@
 
 namespace SantaShip.Computer.Instructions
 {
-    /** From  the instruction pointer adds the values on the positions given by the first
-     * and second parameter and places the result in the position given in the third parameter **/
-    public class AdditionInstruction : IInstruction
+    public class EqualsInstruction : IInstruction
     {
         private readonly RetrieveParameter _first;
         private readonly RetrieveParameter _second;
         private readonly StoreParameter _third;
 
-        public AdditionInstruction(InstructionCode instructionCode)
+        public EqualsInstruction(InstructionCode instructionCode)
         {
             _first = new RetrieveParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
             _second = new RetrieveParameter(instructionCode.SecondParameterMode, IntCodeComputer.InstructionPointer + 2);
@@ -19,11 +17,15 @@ namespace SantaShip.Computer.Instructions
 
         public void Process(ref int[] memory)
         {
-            if (_third.Position <= memory.Length)
+            int firstValue = _first.GetValue(ref memory);
+            int secondValue = _second.GetValue(ref memory);
+            if (firstValue == secondValue)
             {
-                int firstValue = _first.GetValue(ref memory);
-                int secondValue = _second.GetValue(ref memory);
-                _third.StoreValue(ref memory, firstValue + secondValue);
+                _third.StoreValue(ref memory, 1);
+            }
+            else
+            {
+                _third.StoreValue(ref memory, 0);
             }
             IntCodeComputer.InstructionPointer += 4;
         }

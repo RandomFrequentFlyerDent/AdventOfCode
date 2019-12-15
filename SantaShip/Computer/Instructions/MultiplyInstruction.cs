@@ -9,7 +9,6 @@ namespace SantaShip.Computer.Instructions
         private readonly RetrieveParameter _first;
         private readonly RetrieveParameter _second;
         private readonly StoreParameter _third;
-        public int NumberOfUsedMemorySlots { get { return 4; } }
 
         public MultiplyInstruction(InstructionCode instructionCode)
         {
@@ -26,6 +25,7 @@ namespace SantaShip.Computer.Instructions
                 int secondValue = _second.GetValue(ref memory);
                 _third.StoreValue(ref memory, firstValue * secondValue);
             }
+            IntCodeComputer.InstructionPointer += 4;
         }
     }
 }

@@ -28,7 +28,6 @@ namespace SantaShip
 
         public void Process()
         {
-
             var instructionFactory = new InstructionFactory();
             var lengthOfMemory = _memory.Length;
             var reading = true;
@@ -51,7 +50,6 @@ namespace SantaShip
                     {
                         instruction.Process(ref _memory);
                     }
-                    InstructionPointer += instruction.NumberOfUsedMemorySlots;
                 }
                 else
                 {

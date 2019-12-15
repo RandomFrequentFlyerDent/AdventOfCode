@@ -6,7 +6,6 @@ namespace SantaShip.Computer.Instructions
     {
         private readonly int? _input;
         private readonly StoreParameter _first;
-        public int NumberOfUsedMemorySlots { get { return 2; } }
 
         public InputInstruction(InstructionCode instructionCode, int? input)
         {
@@ -17,6 +16,7 @@ namespace SantaShip.Computer.Instructions
         public void Process(ref int[] memory)
         {
             _first.StoreValue(ref memory, _input);
+            IntCodeComputer.InstructionPointer += 2;
         }
     }
 }

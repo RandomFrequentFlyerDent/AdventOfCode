@@ -5,7 +5,6 @@ namespace SantaShip.Computer.Instructions
     public class OutputInstruction : IInstruction
     {
         private readonly RetrieveParameter _first;
-        public int NumberOfUsedMemorySlots { get { return 2; } }
 
         public OutputInstruction(InstructionCode instructionCode)
         {
@@ -16,7 +15,9 @@ namespace SantaShip.Computer.Instructions
 
         public int GetOutput(ref int[] memory)
         {
-            return _first.GetValue(ref memory);
+            var value = _first.GetValue(ref memory);
+            IntCodeComputer.InstructionPointer += 2;
+            return value;
         }
     }
 }
