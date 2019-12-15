@@ -7,6 +7,7 @@
         public Circuitry Circuitry { get; }
         public VenusFuelContainer VenusFuelContainer { get; }
         public DiagnosticProgram DiagnosticProgram { get; }
+        public NavSystem NavSystem { get; }
 
         public SantaShip()
         {
@@ -15,6 +16,7 @@
             Circuitry = new Circuitry();
             VenusFuelContainer = new VenusFuelContainer();
             DiagnosticProgram = new DiagnosticProgram();
+            NavSystem = new NavSystem();
         }
     }
 }
