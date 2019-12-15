@@ -1,8 +1,9 @@
-﻿namespace SantaShip.Instructions
+﻿namespace SantaShip.Computer.Instructions
+
 {
     public class InstructionFactory
     {
-        public IInstruction CreateInstruction(int instructionCode, int instructionPointer)
+        public IInstruction CreateInstruction(int instructionCode, int instructionPointer, int? input = null)
         {
             var opCode = (OpCode)instructionCode;
 
@@ -10,6 +11,10 @@
                 return new AdditionInstruction(instructionPointer);
             if (opCode == OpCode.Multiply)
                 return new MultiplyInstruction(instructionPointer);
+            if (opCode == OpCode.Input)
+                return new InputInstruction(instructionPointer, input);
+            if (opCode == OpCode.Output)
+                return new OutputInstruction(instructionPointer);
 
             return null;
         }
@@ -18,6 +23,8 @@
         {
             Add = 1,
             Multiply = 2,
+            Input = 3,
+            Output = 4,
             Stop = 99
         }
     }

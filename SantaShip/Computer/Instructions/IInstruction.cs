@@ -1,4 +1,4 @@
-﻿namespace SantaShip
+﻿namespace SantaShip.Computer.Instructions
 {
     public interface IInstruction
     {

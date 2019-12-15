@@ -6,6 +6,7 @@
         public ModuleInformation ModuleInformation { get; }
         public Circuitry Circuitry { get; }
         public VenusFuelContainer VenusFuelContainer { get; }
+        public DiagnosticProgram DiagnosticProgram { get; }
 
         public SantaShip()
         {
@@ -13,6 +14,7 @@
             ModuleInformation = new ModuleInformation();
             Circuitry = new Circuitry();
             VenusFuelContainer = new VenusFuelContainer();
+            DiagnosticProgram = new DiagnosticProgram();
         }
     }
 }

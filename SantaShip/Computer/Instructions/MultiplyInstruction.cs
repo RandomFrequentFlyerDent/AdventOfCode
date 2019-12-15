@@ -1,4 +1,4 @@
-﻿namespace SantaShip.Instructions
+﻿namespace SantaShip.Computer.Instructions
 {
     /** From  the instruction pointer multiplies the values on the position given by the first
      * and second parameter and places the result in the position given in the third parameter **/

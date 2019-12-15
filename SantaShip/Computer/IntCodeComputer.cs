@@ -1,4 +1,4 @@
-﻿using SantaShip.Instructions;
+﻿using SantaShip.Computer.Instructions;
 
 namespace SantaShip
 {
@@ -6,6 +6,8 @@ namespace SantaShip
     {
         public int[] Memory { get { return _memory; } }
         private int[] _memory;
+        public int Input { get; set; }
+        public int Output { get; private set; }
 
         public IntCodeComputer(int[] memory)
         {
@@ -33,10 +35,17 @@ namespace SantaShip
             do
             {
                 var opCode = _memory[instructionPointer];
-                IInstruction instruction = instructionFactory.CreateInstruction(opCode, instructionPointer);
+                IInstruction instruction = instructionFactory.CreateInstruction(opCode, instructionPointer, Input);
                 if (instruction != null)
                 {
-                    instruction.Process(ref _memory);
+                    if (instruction is OutputInstruction)
+                    {
+                        Output = ((OutputInstruction)instruction).GetOutput(ref _memory);
+                    }
+                    else
+                    {
+                        instruction.Process(ref _memory);
+                    }
                     instructionPointer += instruction.NumberOfUsedMemorySlots;
                 }
                 else
