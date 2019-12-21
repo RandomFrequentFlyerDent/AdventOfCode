@@ -1,9 +1,19 @@
-﻿namespace SantaShip.Computer.Instructions
+﻿using System;
+using System.Collections.Generic;
+
+namespace SantaShip.Computer.Instructions
 
 {
     public class InstructionFactory
     {
-        public IInstruction CreateInstruction(int code, int? input = null)
+        private Queue<Int32> _inputQueue;
+
+        public InstructionFactory(List<int> input)
+        {
+            _inputQueue = new Queue<Int32>(input);
+        }
+
+        public IInstruction CreateInstruction(int code)
         {
             var instructionCode = new InstructionCode(code.ToString());
 
@@ -12,7 +22,7 @@
             if (instructionCode.OpCode == OpCode.Multiply)
                 return new MultiplyInstruction(instructionCode);
             if (instructionCode.OpCode == OpCode.Input)
-                return new InputInstruction(instructionCode, input);
+                return new InputInstruction(instructionCode, _inputQueue.Dequeue());
             if (instructionCode.OpCode == OpCode.Output)
                 return new OutputInstruction(instructionCode);
             if (instructionCode.OpCode == OpCode.JumpIfTrue)

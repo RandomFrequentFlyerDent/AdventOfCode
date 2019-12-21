@@ -1,4 +1,5 @@
 ﻿using SantaShip.Computer.Instructions;
+using System.Collections.Generic;
 
 namespace SantaShip
 {
@@ -7,13 +8,21 @@ namespace SantaShip
         public int[] Memory { get { return _memory; } }
         private int[] _memory;
         public static int InstructionPointer { get; set; }
-        public int Input { get; set; }
+        private List<int> _input;
+        public int Input
+        {
+            set
+            {
+             _input.Add(value);
+            }
+        }
         public int Output { get; private set; }
 
         public IntCodeComputer(int[] memory)
         {
             _memory = memory;
             InstructionPointer = 0;
+            _input = new List<int>();
         }
 
         public void SetNoun(int noun)
@@ -28,14 +37,14 @@ namespace SantaShip
 
         public void Process()
         {
-            var instructionFactory = new InstructionFactory();
+            var instructionFactory = new InstructionFactory(_input);
             var lengthOfMemory = _memory.Length;
             var reading = true;
 
             do
             {
                 var opCode = _memory[InstructionPointer];
-                IInstruction instruction = instructionFactory.CreateInstruction(opCode, Input);
+                IInstruction instruction = instructionFactory.CreateInstruction(opCode);
                 if (instruction != null)
                 {
                     if (instruction is StopInstruction)
