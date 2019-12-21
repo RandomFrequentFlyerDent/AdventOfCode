@@ -15,6 +15,9 @@ namespace AnswerApp
             _universalOrbitMap = new UniversalOrbitMap(DownloadMap());
         }
 
+        /// <summary>
+        /// Day 6 Answer 1
+        /// </summary>
         public void GetTotalNumberDirectAndIndirectOrbits()
         {
             var total = _universalOrbitMap.GetTotalNumberDirectAndIndirectOrbits();

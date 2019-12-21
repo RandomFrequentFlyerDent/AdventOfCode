@@ -13,6 +13,12 @@ namespace AnswerApp
             _secureContainer = new SecureContainer();
         }
 
+        /// <summary>
+        /// Day 4 Answer 1 and 2
+        /// </summary>
+        /// <param name="startRange"></param>
+        /// <param name="endRange"></param>
+        /// <param name="maxTwoAdjacent"></param>
         internal void GetNumberOfValidPasswords(int startRange, int endRange, bool maxTwoAdjacent)
         {
             var possiblePasswords = 0;

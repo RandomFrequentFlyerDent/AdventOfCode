@@ -49,6 +49,10 @@ namespace AnswerApp
             _computer = new IntCodeComputer((int[])_originalMemory.Clone());
         }
 
+        /// <summary>
+        /// Day 5 Answer 1 and 2
+        /// </summary>
+        /// <param name="input"></param>
         public void Run(int input)
         {
             _computer.Input = input;
