@@ -1,38 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SantaShip.Computer.Instructions
 
 {
     public class InstructionFactory
     {
-        private Queue<Int32> _inputQueue;
+        private Queue<int> _inputQueue;
 
-        public InstructionFactory(List<int> input)
+        public InstructionFactory(Queue<int> input)
         {
-            _inputQueue = new Queue<Int32>(input);
+            _inputQueue = input;
         }
 
-        public IInstruction CreateInstruction(int code)
+        public IInstruction CreateInstruction(int code, int instructionPointer)
         {
             var instructionCode = new InstructionCode(code.ToString());
 
             if (instructionCode.OpCode == OpCode.Add)
-                return new AdditionInstruction(instructionCode);
+                return new AdditionInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.Multiply)
-                return new MultiplyInstruction(instructionCode);
+                return new MultiplyInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.Input)
-                return new InputInstruction(instructionCode, _inputQueue.Dequeue());
+                return new InputInstruction(instructionCode, instructionPointer, _inputQueue.Dequeue());
             if (instructionCode.OpCode == OpCode.Output)
-                return new OutputInstruction(instructionCode);
+                return new OutputInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.JumpIfTrue)
-                return new JumpIfTrueInstruction(instructionCode);
+                return new JumpIfTrueInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.JumpIfFalse)
-                return new JumpIfFalseInstruction(instructionCode);
+                return new JumpIfFalseInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.LessThan)
-                return new LessThanInstruction(instructionCode);
+                return new LessThanInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.Equals)
-                return new EqualsInstruction(instructionCode);
+                return new EqualsInstruction(instructionCode, instructionPointer);
             if (instructionCode.OpCode == OpCode.Stop)
                 return new StopInstruction();
 

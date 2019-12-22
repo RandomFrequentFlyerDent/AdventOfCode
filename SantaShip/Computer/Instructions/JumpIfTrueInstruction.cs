@@ -4,25 +4,27 @@ namespace SantaShip.Computer.Instructions
 {
     public class JumpIfTrueInstruction : IInstruction
     {
+        private readonly int _instructionPointer;
         private readonly RetrieveParameter _first;
         private readonly RetrieveParameter _second;
         public int NumberOfUsedMemorySlots { get; }
 
-        public JumpIfTrueInstruction(InstructionCode instructionCode)
+        public JumpIfTrueInstruction(InstructionCode instructionCode, int instructionPointer)
         {
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
-            _second = new RetrieveParameter(instructionCode.SecondParameterMode, IntCodeComputer.InstructionPointer + 2);
+            _instructionPointer = instructionPointer;
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2);
         }
 
-        public void Process(ref int[] memory)
+        public int Process(ref int[] memory)
         {
             if (_first.GetValue(ref memory) != 0)
             {
-                IntCodeComputer.InstructionPointer = _second.GetValue(ref memory);
+                return _second.GetValue(ref memory);
             }
             else
             {
-                IntCodeComputer.InstructionPointer += 3;
+                return _instructionPointer + 3;
             }
         }
     }

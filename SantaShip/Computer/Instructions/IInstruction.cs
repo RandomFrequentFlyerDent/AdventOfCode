@@ -2,6 +2,6 @@
 {
     public interface IInstruction
     {
-        void Process(ref int[] memory);
+        int Process(ref int[] memory);
     }
 }

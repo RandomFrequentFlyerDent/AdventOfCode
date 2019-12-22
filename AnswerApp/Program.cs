@@ -6,7 +6,8 @@
         {
             var santaShip = new SantaShip();
 
-            santaShip.Thrusters.GetHighestSignal();
+            santaShip.Thrusters.GetHighestSignal(true);
+            //santaShip.Thrusters.GetHighestSignal(false);
             //santaShip.NavSystem.GetTotalNumberDirectAndIndirectOrbits();
             //santaShip.DiagnosticProgram.Run(5);
             //santaShip.DiagnosticProgram.Run(1);

@@ -30,15 +30,15 @@ namespace AnswerApp
         };
 
         /// <summary>
-        /// Day 7 Answer 1
+        /// Day 7 Answer 1 & 2
         /// </summary>
-        public void GetHighestSignal()
+        public void GetHighestSignal(bool withFeedBackLoop)
         {
-            var sequences = PhaseSequenceGenerator.Generate(new int[] { 0, 1, 2, 3, 4 });
+            var sequences = GetSequences(withFeedBackLoop);
             int highestSignal = int.MinValue;
             foreach (var sequence in sequences)
             {
-                var signal = GetSignal(sequence);
+                var signal = GetSignal(sequence, withFeedBackLoop);
                 if (signal > highestSignal)
                     highestSignal = signal;
             }
@@ -46,9 +46,16 @@ namespace AnswerApp
             Console.WriteLine($"The highest signal that can be sent to the thrusters is {highestSignal}");
         }
 
-        private int GetSignal(int[] phaseSequence)
+        private List<int[]> GetSequences(bool withFeedBackLoop)
         {
-            var computer = new Amplifiers(_amplifierControllerSoftware, phaseSequence);
+            if (withFeedBackLoop)
+                return PhaseSequenceGenerator.Generate(new int[] { 9, 8, 7, 6, 5 });
+            return PhaseSequenceGenerator.Generate(new int[] { 0, 1, 2, 3, 4 });
+        }
+
+        private int GetSignal(int[] phaseSequence, bool withFeedBackLoop)
+        {
+            var computer = new AmplifierSystem(_amplifierControllerSoftware, phaseSequence);
             return computer.GetThrusterSignal();
         }
     }

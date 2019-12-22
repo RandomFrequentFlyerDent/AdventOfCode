@@ -1,28 +1,28 @@
 ﻿using SantaShip.Computer.Instructions;
 using System.Collections.Generic;
 
-namespace SantaShip
+namespace SantaShip.Computer
 {
-    public class IntCodeComputer
+    public class IntCodeComputer : IOutputReceiver
     {
-        public int[] Memory { get { return _memory; } }
+        public int InstructionPointer { get; set; }
+
         private int[] _memory;
-        public static int InstructionPointer { get; set; }
-        private List<int> _input;
-        public int Input
-        {
-            set
-            {
-             _input.Add(value);
-            }
-        }
+        public int[] Memory { get { return _memory; } }
+
+        private Queue<int> _input;
+        public int Input { set { _input.Enqueue(value); } }
         public int Output { get; private set; }
+
+        public bool HasStopped { get; private set; }
+
+        public IOutputReceiver OutputReceiver { get; set; }
 
         public IntCodeComputer(int[] memory)
         {
             _memory = memory;
             InstructionPointer = 0;
-            _input = new List<int>();
+            _input = new Queue<int>();
         }
 
         public void SetNoun(int noun)
@@ -44,20 +44,27 @@ namespace SantaShip
             do
             {
                 var opCode = _memory[InstructionPointer];
-                IInstruction instruction = instructionFactory.CreateInstruction(opCode);
+                IInstruction instruction = instructionFactory.CreateInstruction(opCode, InstructionPointer);
                 if (instruction != null)
                 {
                     if (instruction is StopInstruction)
                     {
                         reading = false;
+                        HasStopped = true;
                     }
-                     else if (instruction is OutputInstruction)
+                    else if (instruction is OutputInstruction)
                     {
                         Output = ((OutputInstruction)instruction).GetOutput(ref _memory);
+                        if (OutputReceiver != null)
+                        {
+                            OutputReceiver.ReceiveInput(Output);
+                        }
+                        InstructionPointer = instruction.Process(ref _memory);
+                        reading = false;
                     }
                     else
                     {
-                        instruction.Process(ref _memory);
+                        InstructionPointer = instruction.Process(ref _memory);
                     }
                 }
                 else
@@ -71,6 +78,11 @@ namespace SantaShip
         public int RetrieveValueFromMemory(int address)
         {
             return _memory[address];
+        }
+
+        public void ReceiveInput(int input)
+        {
+            _input.Enqueue(input);
         }
     }
 }

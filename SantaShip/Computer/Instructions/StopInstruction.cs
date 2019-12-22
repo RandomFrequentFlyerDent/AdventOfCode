@@ -4,6 +4,6 @@
     {
         public int NumberOfUsedMemorySlots { get { return 1; } }
 
-        public void Process(ref int[] memory) { }
+        public int Process(ref int[] memory) { return 0; }
     }
 }

@@ -6,18 +6,20 @@ namespace SantaShip.Computer.Instructions
      * and second parameter and places the result in the position given in the third parameter **/
     public class MultiplyInstruction : IInstruction
     {
+        private readonly int _instructionPointer;
         private readonly RetrieveParameter _first;
         private readonly RetrieveParameter _second;
         private readonly StoreParameter _third;
 
-        public MultiplyInstruction(InstructionCode instructionCode)
+        public MultiplyInstruction(InstructionCode instructionCode, int instructionPointer)
         {
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
-            _second = new RetrieveParameter(instructionCode.SecondParameterMode, IntCodeComputer.InstructionPointer + 2);
-            _third = new StoreParameter(instructionCode.ThirdParameterMode, IntCodeComputer.InstructionPointer + 3);
+            _instructionPointer = instructionPointer;
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2);
+            _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3);
         }
 
-        public void Process(ref int[] memory)
+        public int Process(ref int[] memory)
         {
             if (_third.Position <= memory.Length)
             {
@@ -25,7 +27,7 @@ namespace SantaShip.Computer.Instructions
                 int secondValue = _second.GetValue(ref memory);
                 _third.StoreValue(ref memory, firstValue * secondValue);
             }
-            IntCodeComputer.InstructionPointer += 4;
+            return _instructionPointer + 4;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using SantaShip;
+﻿using SantaShip.Computer;
 using System;
 
 namespace AnswerApp

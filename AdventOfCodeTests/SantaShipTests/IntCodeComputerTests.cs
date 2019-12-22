@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using SantaShip;
+using SantaShip.Computer;
 
 namespace AdventOfCodeTests.SantaShipTests
 {

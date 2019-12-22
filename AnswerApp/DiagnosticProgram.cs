@@ -1,7 +1,5 @@
-﻿using SantaShip;
+﻿using SantaShip.Computer;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AnswerApp
 {

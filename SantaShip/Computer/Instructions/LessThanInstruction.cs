@@ -4,18 +4,20 @@ namespace SantaShip.Computer.Instructions
 {
     public class LessThanInstruction : IInstruction
     {
+        private readonly int _instructionPointer;
         private readonly RetrieveParameter _first;
         private readonly RetrieveParameter _second;
         private readonly StoreParameter _third;
 
-        public LessThanInstruction(InstructionCode instructionCode)
+        public LessThanInstruction(InstructionCode instructionCode, int instructionPointer)
         {
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, IntCodeComputer.InstructionPointer + 1);
-            _second = new RetrieveParameter(instructionCode.SecondParameterMode, IntCodeComputer.InstructionPointer + 2);
-            _third = new StoreParameter(instructionCode.ThirdParameterMode, IntCodeComputer.InstructionPointer + 3);
+            _instructionPointer = instructionPointer;
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2);
+            _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3);
         }
 
-        public void Process(ref int[] memory)
+        public int Process(ref int[] memory)
         {
             int firstValue = _first.GetValue(ref memory);
             int secondValue = _second.GetValue(ref memory);
@@ -27,7 +29,7 @@ namespace SantaShip.Computer.Instructions
             {
                 _third.StoreValue(ref memory, 0);
             }
-            IntCodeComputer.InstructionPointer += 4;
+            return _instructionPointer + 4;
         }
     }
 }
