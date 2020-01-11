@@ -3,7 +3,8 @@
     public enum ParameterMode
     {
         Position = 0,
-        Immediate = 1
+        Immediate = 1,
+        Relative = 2
     }
 
     public enum OpCode
@@ -16,6 +17,7 @@
         JumpIfFalse = 6,
         LessThan = 7,
         Equals = 8,
+        RelativeBaseOffset = 9,
         Stop = 99
     }
 }

@@ -7,10 +7,10 @@ namespace SantaShip.Computer.Instructions
         private readonly int _instructionPointer;
         private readonly RetrieveParameter _first;
 
-        public OutputInstruction(InstructionCode instructionCode, int instructionPointer)
+        public OutputInstruction(InstructionCode instructionCode, int instructionPointer, int relativeBase)
         {
             _instructionPointer = instructionPointer;
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1, relativeBase);
         }
 
         public int Process(ref int[] memory)

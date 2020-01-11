@@ -8,11 +8,11 @@ namespace SantaShip.Computer.Instructions
         private readonly int? _input;
         private readonly StoreParameter _first;
 
-        public InputInstruction(InstructionCode instructionCode, int instructionPointer, int? input)
+        public InputInstruction(InstructionCode instructionCode, int instructionPointer, int relativeBase, int? input)
         {
             _instructionPointer = instructionPointer;
             _input = input;
-            _first = new StoreParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
+            _first = new StoreParameter(instructionCode.FirstParameterMode, instructionPointer + 1, relativeBase);
         }
 
         public int Process(ref int[] memory)

@@ -2,8 +2,6 @@
 
 namespace SantaShip.Computer.Instructions
 {
-    /** From  the instruction pointer adds the values on the positions given by the first
-     * and second parameter and places the result in the position given in the third parameter **/
     public class AdditionInstruction : IInstruction
     {
         private readonly int _instructionPointer;
@@ -11,12 +9,12 @@ namespace SantaShip.Computer.Instructions
         private readonly RetrieveParameter _second;
         private readonly StoreParameter _third;
 
-        public AdditionInstruction(InstructionCode instructionCode, int instructionPointer)
+        public AdditionInstruction(InstructionCode instructionCode, int instructionPointer, int relativeBase)
         {
             _instructionPointer = instructionPointer;
-            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1);
-            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2);
-            _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3);
+            _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1, relativeBase);
+            _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2, relativeBase);
+            _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3, relativeBase);
         }
 
         public int Process(ref int[] memory)

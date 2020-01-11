@@ -6,6 +6,7 @@ namespace SantaShip.Computer
     public class IntCodeComputer : IOutputReceiver
     {
         public int InstructionPointer { get; set; }
+        public int RelativeBase { get; set; }
 
         private int[] _memory;
         public int[] Memory { get { return _memory; } }
@@ -22,6 +23,7 @@ namespace SantaShip.Computer
         {
             _memory = memory;
             InstructionPointer = 0;
+            RelativeBase = 0;
             _input = new Queue<int>();
         }
 
@@ -44,7 +46,7 @@ namespace SantaShip.Computer
             do
             {
                 var opCode = _memory[InstructionPointer];
-                IInstruction instruction = instructionFactory.CreateInstruction(opCode, InstructionPointer);
+                IInstruction instruction = instructionFactory.CreateInstruction(opCode, InstructionPointer, RelativeBase);
                 if (instruction != null)
                 {
                     if (instruction is StopInstruction)
