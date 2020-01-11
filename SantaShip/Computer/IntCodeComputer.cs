@@ -54,6 +54,11 @@ namespace SantaShip.Computer
                         reading = false;
                         HasStopped = true;
                     }
+                    else if (instruction is RelativeBaseOffsetInstruction)
+                    {
+                        RelativeBase = ((RelativeBaseOffsetInstruction)instruction).GetRelativeBase(ref _memory);
+                        InstructionPointer = instruction.Process(ref _memory);
+                    }
                     else if (instruction is OutputInstruction)
                     {
                         Output = ((OutputInstruction)instruction).GetOutput(ref _memory);

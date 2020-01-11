@@ -3,14 +3,14 @@
     public class StoreParameter
     {
         private readonly ParameterMode _mode;
+        public int _relativeBase { get; private set; }
         public  int Position { get; private set; }
-        public int RelativeBase { get; private set; }
 
         public StoreParameter(ParameterMode mode, int position, int relativeBase)
         {
             _mode = mode;
+            _relativeBase = relativeBase;
             Position = position;
-            RelativeBase = relativeBase;
         }
 
         public void StoreValue(ref int[] memory, int? value)
@@ -25,7 +25,7 @@
                 memory[memory[Position]] = (int)value;
 
             if (_mode == ParameterMode.Relative)
-                memory[memory[RelativeBase + Position]] = (int)value;
+                memory[memory[_relativeBase + Position]] = (int)value;
         }
     }
 }
