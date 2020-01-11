@@ -1,10 +1,10 @@
-﻿namespace SantaShip.Computer.Instructions.Paramters
+﻿namespace SantaShip.Computer.Instructions.Parameters
 {
     public class RetrieveParameter
     {
-        private ParameterMode _mode;
-        private int _position;
-        private int _relativeBase;
+        private readonly ParameterMode _mode;
+        private readonly int _position;
+        private readonly int _relativeBase;
 
         public RetrieveParameter(ParameterMode mode, int position, int relativeBase)
         {

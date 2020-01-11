@@ -1,8 +1,8 @@
-﻿namespace SantaShip.Computer.Instructions.Paramters
+﻿namespace SantaShip.Computer.Instructions.Parameters
 {
     public class StoreParameter
     {
-        private ParameterMode _mode;
+        private readonly ParameterMode _mode;
         public  int Position { get; private set; }
         public int RelativeBase { get; private set; }
 

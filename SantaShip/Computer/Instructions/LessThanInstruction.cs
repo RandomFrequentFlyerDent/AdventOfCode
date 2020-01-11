@@ -1,4 +1,4 @@
-﻿using SantaShip.Computer.Instructions.Paramters;
+﻿using SantaShip.Computer.Instructions.Parameters;
 
 namespace SantaShip.Computer.Instructions
 {
