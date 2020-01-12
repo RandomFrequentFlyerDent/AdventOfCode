@@ -17,7 +17,7 @@ namespace AdventOfCodeTests.SantaShipTests
 
             program.Process();
 
-            var actual = program.Memory;
+            var actual = program.SoftwareProgram.Memory;
 
             Assert.AreEqual(expected, actual);
         }
@@ -33,7 +33,7 @@ namespace AdventOfCodeTests.SantaShipTests
 
             program.Process();
 
-            var actual = program.Memory;
+            var actual = program.SoftwareProgram.Memory;
 
             Assert.AreEqual(expected, actual);
         }
@@ -48,7 +48,7 @@ namespace AdventOfCodeTests.SantaShipTests
             var program = new IntCodeComputer(input);
             program.Process();
 
-            var actual = program.Memory;
+            var actual = program.SoftwareProgram.Memory;
 
             Assert.AreEqual(expected, actual);
         }
@@ -64,7 +64,7 @@ namespace AdventOfCodeTests.SantaShipTests
 
             program.Process();
 
-            var actual = program.Memory;
+            var actual = program.SoftwareProgram.Memory;
 
             Assert.AreEqual(expected, actual);
         }
@@ -80,7 +80,7 @@ namespace AdventOfCodeTests.SantaShipTests
 
             program.Process();
 
-            var actual = program.Memory;
+            var actual = program.SoftwareProgram.Memory;
 
             Assert.AreEqual(expected, actual);
         }
@@ -240,6 +240,46 @@ namespace AdventOfCodeTests.SantaShipTests
             var output = program.Output;
 
             Assert.AreEqual(0, output);
+        }
+
+        // 109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99 takes no input and produces a copy of itself as output.
+        [Test]
+        public void ProducesCopyOfItself()
+        {
+            var memory = new int[] { 109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99 };
+            var program = new IntCodeComputer(memory);
+            program.Process();
+
+            var error = program.ErrorProgram.Memory;
+
+            Assert.AreEqual(memory, error);
+        }
+
+        // 1102,34915192,34915192,7,4,7,99,0 should output a 16-digit number
+        [Test]
+        public void Produces16DigitNumber()
+        {
+            var memory = new long[] { 1102, 34915192, 34915192, 7, 4, 7, 99, 0 };
+            var program = new IntCodeComputer(memory);
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.IsTrue(output.ToString().Length == 16);
+            Assert.AreEqual(1219070632396864, output);
+        }
+
+        // 104,1125899906842624,99 should output the large number in the middle
+        [Test]
+        public void ProducesLargeNumber()
+        {
+            var memory = new long[] { 104, 1125899906842624, 99 };
+            var program = new IntCodeComputer(memory);
+            program.Process();
+
+            var output = program.Output;
+
+            Assert.AreEqual(1125899906842624, output);
         }
     }
 }

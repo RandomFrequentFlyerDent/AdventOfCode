@@ -31,7 +31,7 @@ namespace SantaShip.Propulsion
             _amplifierA.OutputReceiver = _amplifierB;
         }
 
-        public int GetThrusterSignal()
+        public long GetThrusterSignal()
         {
             _amplifierA.Input = _phaseSequence[0];
             _amplifierA.Input = 0;

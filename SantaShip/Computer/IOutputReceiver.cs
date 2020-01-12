@@ -2,6 +2,6 @@
 {
     public interface IOutputReceiver
     {
-        void ReceiveInput(int input);
+        void ReceiveInput(long input);
     }
 }

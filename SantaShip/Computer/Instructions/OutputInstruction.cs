@@ -1,4 +1,5 @@
 ﻿using SantaShip.Computer.Instructions.Parameters;
+using System;
 
 namespace SantaShip.Computer.Instructions
 {
@@ -13,15 +14,19 @@ namespace SantaShip.Computer.Instructions
             _first = new RetrieveParameter(instructionCode.FirstParameterMode, instructionPointer + 1, relativeBase);
         }
 
-        public int Process(ref int[] memory)
+        public void Process(SoftwareProgram memory)
+        {
+            // no action required
+        }
+
+        public int MoveInstructionPointer()
         {
             return _instructionPointer + 2;
         }
 
-        public int GetOutput(ref int[] memory)
+        public long GetOutput(ref SoftwareProgram memory)
         {
-            var value = _first.GetValue(ref memory);
-            return value;
+            return _first.GetValue(ref memory);
         }
     }
 }

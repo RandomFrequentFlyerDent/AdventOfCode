@@ -1,10 +1,12 @@
-﻿namespace SantaShip.Computer.Instructions.Parameters
+﻿using System;
+
+namespace SantaShip.Computer.Instructions.Parameters
 {
     public class StoreParameter
     {
         private readonly ParameterMode _mode;
         public int _relativeBase { get; private set; }
-        public  int Position { get; private set; }
+        public int Position { get; private set; }
 
         public StoreParameter(ParameterMode mode, int position, int relativeBase)
         {
@@ -13,7 +15,7 @@
             Position = position;
         }
 
-        public void StoreValue(ref int[] memory, int? value)
+        public void StoreValue(ref SoftwareProgram memory, long? value)
         {
             if (value == null)
                 return;
@@ -22,10 +24,13 @@
                 memory[Position] = (int)value;
 
             if (_mode == ParameterMode.Position)
-                memory[memory[Position]] = (int)value;
+                memory[Convert.ToInt32(memory[Position])] = (long)value;
 
             if (_mode == ParameterMode.Relative)
-                memory[memory[_relativeBase + Position]] = (int)value;
+            {
+                var index = Convert.ToInt32(memory[Position]);
+                memory[_relativeBase + index] = (long)value;
+            }
         }
     }
 }

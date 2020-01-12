@@ -17,10 +17,10 @@ namespace SantaShip.Computer.Instructions
             _third = new StoreParameter(instructionCode.ThirdParameterMode, instructionPointer + 3, relativeBase);
         }
 
-        public int Process(ref int[] memory)
+        public void Process(SoftwareProgram memory)
         {
-            int firstValue = _first.GetValue(ref memory);
-            int secondValue = _second.GetValue(ref memory);
+            long firstValue = _first.GetValue(ref memory);
+            long secondValue = _second.GetValue(ref memory);
             if (firstValue == secondValue)
             {
                 _third.StoreValue(ref memory, 1);
@@ -29,6 +29,10 @@ namespace SantaShip.Computer.Instructions
             {
                 _third.StoreValue(ref memory, 0);
             }
+        }
+
+        public int MoveInstructionPointer()
+        {
             return _instructionPointer + 4;
         }
     }

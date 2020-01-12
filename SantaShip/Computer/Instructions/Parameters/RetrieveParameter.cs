@@ -1,4 +1,6 @@
-﻿namespace SantaShip.Computer.Instructions.Parameters
+﻿using System;
+
+namespace SantaShip.Computer.Instructions.Parameters
 {
     public class RetrieveParameter
     {
@@ -13,15 +15,16 @@
             _relativeBase = relativeBase;
         }
 
-        public int GetValue(ref int[] memory)
+        public long GetValue(ref SoftwareProgram memory)
         {
             if (_mode == ParameterMode.Immediate)
                 return memory[_position];
 
-            if (_mode == ParameterMode.Relative)
-                return memory[memory[_relativeBase + _position]];
+            if (_mode == ParameterMode.Position)
+                return memory[Convert.ToInt32(memory[_position])];
 
-            return memory[memory[_position]];
+            var index = Convert.ToInt32(memory[_position]);
+            return memory[_relativeBase + index];
         }
     }
 }

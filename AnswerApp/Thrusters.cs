@@ -35,7 +35,7 @@ namespace AnswerApp
         public void GetHighestSignal(bool withFeedBackLoop)
         {
             var sequences = GetSequences(withFeedBackLoop);
-            int highestSignal = int.MinValue;
+            long highestSignal = long.MinValue;
             foreach (var sequence in sequences)
             {
                 var signal = GetSignal(sequence, withFeedBackLoop);
@@ -53,7 +53,7 @@ namespace AnswerApp
             return PhaseSequenceGenerator.Generate(new int[] { 0, 1, 2, 3, 4 });
         }
 
-        private int GetSignal(int[] phaseSequence, bool withFeedBackLoop)
+        private long GetSignal(int[] phaseSequence, bool withFeedBackLoop)
         {
             var computer = new AmplifierSystem(_amplifierControllerSoftware, phaseSequence);
             return computer.GetThrusterSignal();

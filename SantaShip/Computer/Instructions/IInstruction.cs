@@ -2,6 +2,7 @@
 {
     public interface IInstruction
     {
-        int Process(ref int[] memory);
+        void Process(SoftwareProgram memory);
+        int MoveInstructionPointer();
     }
 }

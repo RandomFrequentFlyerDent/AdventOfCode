@@ -5,14 +5,14 @@ namespace SantaShip.Computer.Instructions
 {
     public class InstructionFactory
     {
-        private readonly Queue<int> _inputQueue;
+        private readonly Queue<long> _inputQueue;
 
-        public InstructionFactory(Queue<int> input)
+        public InstructionFactory(Queue<long> input)
         {
             _inputQueue = input;
         }
 
-        public IInstruction CreateInstruction(int code, int instructionPointer, int relativeBase)
+        public IInstruction CreateInstruction(long code, int instructionPointer, int relativeBase)
         {
             var instructionCode = new InstructionCode(code.ToString());
 
@@ -32,6 +32,8 @@ namespace SantaShip.Computer.Instructions
                 return new LessThanInstruction(instructionCode, instructionPointer, relativeBase);
             if (instructionCode.OpCode == OpCode.Equals)
                 return new EqualsInstruction(instructionCode, instructionPointer, relativeBase);
+            if (instructionCode.OpCode == OpCode.RelativeBaseOffset)
+                return new RelativeBaseOffsetInstruction(instructionCode, instructionPointer, relativeBase);
             if (instructionCode.OpCode == OpCode.Stop)
                 return new StopInstruction();
 

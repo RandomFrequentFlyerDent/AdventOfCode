@@ -1,13 +1,13 @@
 ﻿using SantaShip.Computer.Instructions.Parameters;
+using System;
 
 namespace SantaShip.Computer.Instructions
 {
     public class JumpIfFalseInstruction : IInstruction
     {
-        private readonly int _instructionPointer;
+        private int _instructionPointer;
         private readonly RetrieveParameter _first;
         private readonly RetrieveParameter _second;
-        public int NumberOfUsedMemorySlots { get; }
 
         public JumpIfFalseInstruction(InstructionCode instructionCode, int instructionPointer, int relativeBase)
         {
@@ -16,16 +16,21 @@ namespace SantaShip.Computer.Instructions
             _second = new RetrieveParameter(instructionCode.SecondParameterMode, instructionPointer + 2, relativeBase);
         }
 
-        public int Process(ref int[] memory)
+        public void Process(SoftwareProgram memory)
         {
             if (_first.GetValue(ref memory) == 0)
             {
-                return _second.GetValue(ref memory);
+                _instructionPointer = Convert.ToInt32(_second.GetValue(ref memory));
             }
             else
             {
-               return _instructionPointer + 3;
+                _instructionPointer += 3;
             }
+        }
+
+        public int MoveInstructionPointer()
+        {
+            return _instructionPointer;
         }
     }
 }

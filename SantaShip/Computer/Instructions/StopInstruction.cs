@@ -2,8 +2,14 @@
 {
     public class StopInstruction : IInstruction
     {
-        public int NumberOfUsedMemorySlots { get { return 1; } }
+        public void Process(SoftwareProgram memory)
+        {
+            // No action required
+        }
 
-        public int Process(ref int[] memory) { return 0; }
+        public int MoveInstructionPointer()
+        {
+            return 0;
+        }
     }
 }

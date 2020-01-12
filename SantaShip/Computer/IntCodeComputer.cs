@@ -1,5 +1,7 @@
 ﻿using SantaShip.Computer.Instructions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SantaShip.Computer
 {
@@ -8,86 +10,94 @@ namespace SantaShip.Computer
         public int InstructionPointer { get; set; }
         public int RelativeBase { get; set; }
 
-        private int[] _memory;
-        public int[] Memory { get { return _memory; } }
+        private SoftwareProgram softwareProgram;
+        public SoftwareProgram SoftwareProgram { get { return softwareProgram; } }
+        public SoftwareProgram ErrorProgram { get; private set; }
 
-        private Queue<int> _input;
-        public int Input { set { _input.Enqueue(value); } }
-        public int Output { get; private set; }
+        private Queue<long> _input;
+        public long Input { set { _input.Enqueue(value); } }
+        public long Output { get; private set; }
 
         public bool HasStopped { get; private set; }
 
         public IOutputReceiver OutputReceiver { get; set; }
 
-        public IntCodeComputer(int[] memory)
+        public IntCodeComputer(int[] memory) : this(memory.Select(i => (long)i).ToArray()) { }
+        public IntCodeComputer(long[] memory)
         {
-            _memory = memory;
+            softwareProgram = new SoftwareProgram(memory);
             InstructionPointer = 0;
             RelativeBase = 0;
-            _input = new Queue<int>();
+            _input = new Queue<long>();
         }
 
         public void SetNoun(int noun)
         {
-            _memory[1] = noun;
+            softwareProgram[1] = noun;
         }
 
         public void SetVerb(int verb)
         {
-            _memory[2] = verb;
+            softwareProgram[2] = verb;
         }
 
         public void Process()
         {
             var instructionFactory = new InstructionFactory(_input);
-            var lengthOfMemory = _memory.Length;
             var reading = true;
+            List<long> errorProgram = new List<long>();
 
             do
             {
-                var opCode = _memory[InstructionPointer];
+                var opCode = softwareProgram[InstructionPointer];
                 IInstruction instruction = instructionFactory.CreateInstruction(opCode, InstructionPointer, RelativeBase);
                 if (instruction != null)
                 {
                     if (instruction is StopInstruction)
                     {
+                        if (errorProgram.Count > 0 && errorProgram[0] != Output)
+                            ErrorProgram = new SoftwareProgram(errorProgram.ToArray());
+
                         reading = false;
                         HasStopped = true;
                     }
                     else if (instruction is RelativeBaseOffsetInstruction)
                     {
-                        RelativeBase = ((RelativeBaseOffsetInstruction)instruction).GetRelativeBase(ref _memory);
-                        InstructionPointer = instruction.Process(ref _memory);
+                        RelativeBase = ((RelativeBaseOffsetInstruction)instruction).GetRelativeBase(ref softwareProgram);
                     }
                     else if (instruction is OutputInstruction)
                     {
-                        Output = ((OutputInstruction)instruction).GetOutput(ref _memory);
+                        Output = ((OutputInstruction)instruction).GetOutput(ref softwareProgram);
                         if (OutputReceiver != null)
                         {
                             OutputReceiver.ReceiveInput(Output);
+                            reading = false;
                         }
-                        InstructionPointer = instruction.Process(ref _memory);
-                        reading = false;
+                        else
+                        {
+                            errorProgram.Add(Output);
+                        }
                     }
                     else
                     {
-                        InstructionPointer = instruction.Process(ref _memory);
+                        softwareProgram.ProcessInstruction(instruction);
                     }
+                    InstructionPointer = instruction.MoveInstructionPointer();
                 }
                 else
                 {
                     reading = false;
                 }
 
-            } while (reading && InstructionPointer < lengthOfMemory);
+            } while (reading && InstructionPointer < SoftwareProgram.Length);
         }
 
         public int RetrieveValueFromMemory(int address)
         {
-            return _memory[address];
+            return Convert.ToInt32(softwareProgram[address]);
         }
 
-        public void ReceiveInput(int input)
+        public void ReceiveInput(long input)
         {
             _input.Enqueue(input);
         }
