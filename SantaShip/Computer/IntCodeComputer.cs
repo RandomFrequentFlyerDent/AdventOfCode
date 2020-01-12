@@ -19,16 +19,18 @@ namespace SantaShip.Computer
         public long Output { get; private set; }
 
         public bool HasStopped { get; private set; }
+        private bool _outputReceiverIsSelf;
 
         public IOutputReceiver OutputReceiver { get; set; }
 
         public IntCodeComputer(int[] memory) : this(memory.Select(i => (long)i).ToArray()) { }
-        public IntCodeComputer(long[] memory)
+        public IntCodeComputer(long[] memory, bool outputReceiverIsSelf = false)
         {
             softwareProgram = new SoftwareProgram(memory);
             InstructionPointer = 0;
             RelativeBase = 0;
             _input = new Queue<long>();
+            _outputReceiverIsSelf = outputReceiverIsSelf;
         }
 
         public void SetNoun(int noun)
@@ -71,6 +73,10 @@ namespace SantaShip.Computer
                         if (OutputReceiver != null)
                         {
                             OutputReceiver.ReceiveInput(Output);
+                            reading = false;
+                        }
+                        else if (_outputReceiverIsSelf)
+                        {
                             reading = false;
                         }
                         else

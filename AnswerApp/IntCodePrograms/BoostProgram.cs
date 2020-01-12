@@ -1,7 +1,7 @@
 ﻿using SantaShip.Computer;
 using System;
 
-namespace AnswerApp
+namespace AnswerApp.IntCodePrograms
 {
     public class BoostProgram
     {

@@ -1,4 +1,6 @@
-﻿namespace AnswerApp
+﻿using AnswerApp.IntCodePrograms;
+
+namespace AnswerApp
 {
     public class SantaShip
     {
@@ -10,5 +12,6 @@
         public NavSystem NavSystem { get { return new NavSystem(); } }
         public Thrusters Thrusters { get { return new Thrusters(); } }
         public BoostProgram BoostProgram { get { return new BoostProgram(); } }
+        public PaintingProgram PaintingProgram { get { return new PaintingProgram(); } }
     }
 }
