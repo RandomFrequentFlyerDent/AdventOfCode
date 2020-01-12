@@ -70,10 +70,15 @@ namespace AnswerApp
                     Console.WriteLine($"\t{opCode}");
                 }
             }
-            else
+            else if(input == 1)
             {
                 var output = _computer.Output;
                 Console.WriteLine($"BOOST keycode is {output}");
+            }
+            else if (input == 2)
+            {
+                var output = _computer.Output;
+                Console.WriteLine($"Coordinates distress signal are {output}");
             }
         }
     }
