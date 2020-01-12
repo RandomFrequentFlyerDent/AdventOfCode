@@ -6,7 +6,8 @@
         {
             var santaShip = new SantaShip();
 
-            santaShip.PaintingProgram.Run();
+            santaShip.PaintingProgram.ReadRegistration();
+            //santaShip.PaintingProgram.CountPaintedPanels();
             //santaShip.BoostProgram.Run(2);
             //santaShip.BoostProgram.Run(1);
             //santaShip.Thrusters.GetHighestSignal(true);

@@ -1,5 +1,6 @@
 ﻿using SantaShip.Computer;
 using System;
+using System.Linq;
 
 namespace AnswerApp.IntCodePrograms
 {
@@ -44,11 +45,51 @@ namespace AnswerApp.IntCodePrograms
         /// Day 11 Answer 1
         /// </summary>
         /// <param name="input"></param>
-        public void Run()
+        public void CountPaintedPanels()
         {
             _robot.Paint();
             var counts = _robot.Hull.Keys.Count;
             Console.WriteLine($"{counts} of panels painted at least once");
+        }
+
+        /// <summary>
+        /// Day 11 Answer 2
+        /// </summary>
+        /// <param name="input"></param>
+        public void ReadRegistration()
+        {
+            _robot.PositionToStartingPanel();
+            _robot.Paint();
+
+            var whitePanels = _robot.Hull
+                .ToDictionary(colorsByPanel => colorsByPanel.Key, colorsByPanel => colorsByPanel.Value.Last())
+                .Where(kv => kv.Value == PanelColor.White)
+                .Select(kv => kv.Key)
+                .ToList(); ;
+
+            var maxY = whitePanels.Max(panel => panel.Y) + 1;
+            var minY = whitePanels.Min(panel => panel.Y) - 1;
+            var maxX = whitePanels.Max(panel => panel.X) + 1;
+            var minX = whitePanels.Min(panel => panel.X) - 1;
+
+            var currentY = maxY;
+
+            for (int y = maxY; y >= minY; y--)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    var color = whitePanels.Contains(new System.Drawing.Point(x, y)) ? '#' : ' ';
+                    if (y < currentY)
+                    {
+                        currentY = y;
+                        Console.WriteLine(color);
+                    }
+                    else
+                    {
+                        Console.Write(color);
+                    }
+                }
+            }
         }
     }
 }

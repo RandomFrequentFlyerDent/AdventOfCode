@@ -16,6 +16,11 @@ namespace SantaShip.Computer
             Hull = new Dictionary<Point, List<PanelColor>>();
         }
 
+        public void PositionToStartingPanel()
+        {
+            Hull.Add(_camera.Position, new List<PanelColor> { PanelColor.White });
+        }
+
         public void Paint()
         {
             do
